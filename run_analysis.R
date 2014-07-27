@@ -25,18 +25,58 @@
 
 ############################################################################################
 
-## Unzip the testset and get the data to a table in R
-testset_unzip <- unz("./data/samsung_acc.zip", 'UCI HAR Dataset/test/X_test.txt')
-testset <- read.table(testset_unzip, header=FALSE, sep='\t')
+########################################################################### X tables
+## Unzip the X_testset and get the data to a table in R
+x_testset_unzip <- unz("./data/samsung_acc.zip", 'UCI HAR Dataset/test/X_test.txt')
+x_testset <- read.table(x_testset_unzip, header=FALSE, sep='')
 
-## Unzip the trainset and get the data to a table in R
-trainset_unzip <- unz("./data/samsung_acc.zip", 'UCI HAR Dataset/train/X_train.txt')
-trainset <- read.table(trainset_unzip, header=FALSE, sep=' ')
+## Unzip the X_trainset and get the data to a table in R
+x_trainset_unzip <- unz("./data/samsung_acc.zip", 'UCI HAR Dataset/train/X_train.txt')
+x_trainset <- read.table(x_trainset_unzip, header=FALSE, sep='')
 
 ## Combine these together
-dataset <- rbind(testset,trainset)
+Xdataset <- rbind(x_testset,x_trainset)
+
+########################################################################### Y tables
+## Unzip the Y_testset and get the data to a table in R
+y_testset_unzip <- unz("./data/samsung_acc.zip", 'UCI HAR Dataset/test/y_test.txt')
+y_testset <- read.table(y_testset_unzip, header=FALSE, sep='')
+
+## Unzip the X_trainset and get the data to a table in R
+y_trainset_unzip <- unz("./data/samsung_acc.zip", 'UCI HAR Dataset/train/y_train.txt')
+y_trainset <- read.table(y_trainset_unzip, header=FALSE, sep='')
+
+## Combine these together
+Ydataset <- rbind(y_testset,y_trainset)
+
+########################################################################### subject tables
+## Unzip the Y_testset and get the data to a table in R
+subject_testset_unzip <- unz("./data/samsung_acc.zip", 'UCI HAR Dataset/test/subject_test.txt')
+subject_testset <- read.table(subject_testset_unzip, header=FALSE, sep='')
+
+## Unzip the X_trainset and get the data to a table in R
+subject_trainset_unzip <- unz("./data/samsung_acc.zip", 'UCI HAR Dataset/train/subject_train.txt')
+subject_trainset <- read.table(subject_trainset_unzip, header=FALSE, sep='')
+
+## Combine these together
+subjectdataset <- rbind(subject_testset,subject_trainset)
 
 ## check total number of rows
-nrow(trainset)
-nrow(testset)
-nrow(dataset)
+
+
+########################################################################### features tables
+
+features_unzip <- unz("./data/samsung_acc.zip", 'UCI HAR Dataset/features.txt')
+features <- read.table(features_unzip, header=FALSE, sep='')
+
+
+nrow(Xdataset)
+nrow(Ydataset)
+nrow(subjectdataset)
+nrow(features)
+
+## Get the relevant columns 
+
+mean_and_std_features <- grep("-mean\\(\\)|-std\\(\\)",features[,2])
+xMeanStd <- Xdataset[,mean_and_std_features]
+
