@@ -10,10 +10,16 @@ The script consists of the following steps:
 Step 0: download the data. Since the programming assignment states that it is assumed that the raw data is already in the 
 working file, I changed these steps into comments.
 
-Step 1: unzips the test and training set from the raw data, reads them into R tables and combines the data into 1 set
+Step 1: unzips the test and training sets (X,Y, subject) from the raw data, reads them into R tables and combines the data into 1 set.
+Also reads features file.
 
 Step 2: extract relevant info mean and standard 
 
 To be continued ...
 
 Dear fellow coursera student... I apologise, this work is obviously not nearly finished!
+
+Lots of steps in between
+
+
+Last step: a "tidy" dataset will be returned after all the steps are ready
